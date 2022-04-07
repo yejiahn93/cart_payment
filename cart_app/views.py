@@ -8,16 +8,17 @@ from .utils import cookieCart, cartData, guestOrder
 
 
 def store(request):
+
     data = cartData(request)
     cartItems = data['cartItems']
-
+    
     products = Product.objects.all()
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'store/store.html',context)
 
 def cart(request):
-
     data = cartData(request)
+
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
@@ -25,15 +26,15 @@ def cart(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/cart.html',context)
 
-def checkout(request):
 
+def checkout(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
 
     context = {'items': items, 'order': order,'cartItems': cartItems}
-    return render(request, 'store/checkout.html',context)
+    return render(request, 'store/checkout.html', context)
 
 def updateItem(request):
     data = json.loads(request.body)
@@ -59,6 +60,9 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()

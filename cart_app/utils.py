@@ -13,29 +13,28 @@ def cookieCart(request):
 
     for i in cart:
         try:
-            if(cart[i]['quantity']>0): 
-                cartItems += cart[i]["quantity"]
+            cartItems += cart[i]["quantity"]
 
-                product = Product.objects.get(id = i)
-                total = (product.price * cart[i]["quantity"])
+            product = Product.objects.get(id = i)
+            total = (product.price * cart[i]["quantity"])
 
-                order['get_cart_total'] += total
-                order['get_cart_items'] += cart[i]["quantity"]
+            order['get_cart_total'] += total
+            order['get_cart_items'] += cart[i]["quantity"]
 
-                item = {
-                    'product':{
-                        'id':product.id,
-                        'name':product.name,
-                        'price':product.price,
-                        'imageURL':product.imageURL,
-                    },
-                    'quantity': cart[i]["quantity"],
-                    'get_total':total
-                    }
-                items.append(item)
+            item = {
+                'product':{
+                    'id':product.id,
+                    'name':product.name,
+                    'price':product.price,
+                    'imageURL':product.imageURL,
+                },
+                'quantity': cart[i]["quantity"],
+                'get_total':total
+                }
+            items.append(item)
 
             if product.digital == False:
-                order['shipping'] == True
+                order['shipping'] = True
         except:
             pass
     return {'cartItems':cartItems, 'order': order,'items':items}
@@ -72,11 +71,11 @@ def guestOrder(request, data):
         complete = False,
         )
     for item in items:
-        Product = Product.objects.get(id = item['product']['id'])
+        product = Product.objects.get(id = item['product']['id'])
 
         orderItem = OrderItem.objects.create(
             product = product,
             order = order,
-            quantity=(item['quantity'] if item['quantity']>0 else -1*item['quantity']),
+            quantity=(item['quantity']),
         )        
     return customer,order
