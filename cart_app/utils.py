@@ -6,7 +6,7 @@ def cookieCart(request):
         cart = json.loads(request.COOKIES['cart'])
     except:
         cart = {}
-    print('Cart:', cart)
+        print('Cart:', cart)
     items = []
     order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False} #when user logout, automatically change to 0
     cartItems = order['get_cart_items']
@@ -29,6 +29,7 @@ def cookieCart(request):
                     'imageURL':product.imageURL,
                 },
                 'quantity': cart[i]["quantity"],
+                'digital':product.digital,
                 'get_total':total
                 }
             items.append(item)
