@@ -106,7 +106,6 @@ def loginPage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        session['user'] = request.form['user']
         if user is not None:
             login(request, user)
             return redirect('store')
@@ -129,26 +128,12 @@ def registerPage(request):
                 email = user.email
             )
             messages.success(request, 'Account was created')
-            return redirect('/')
+            return redirect('/login')
     else:
         form = CreateUserForm()
     context={'form':form}
     return render(request, 'store/register.html',context)
 
-
-# def registerPage(request):
-#     if request.method == 'POST':
-#         form = CreateUserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username= form.cleaned_data.get('username')
-#             Customer.objects.create(
-#                 name=username,
-#                 email = user.email
-#             )
-#             messages.success(request, 'Account was created for' + user)
-#             return redirect('/')
-#     else:
-#         form = CreateUserForm()
-#     context={'form':form}
-#     return render(request, 'store/register.html',context)
+def logoutPage(request):
+    logout(request)
+    return redirect('/')
