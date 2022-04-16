@@ -1,6 +1,10 @@
 # E-commerce
+<ul>
+  <li> Backend: Python</li>
+  <li> Framework: Dajngo</li>
+  <li> Frontend: CSS/HTML/Javascript</li>
+</ul>
 
-<img src="">
 
 ## Description
 <p>
