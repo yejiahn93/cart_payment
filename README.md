@@ -1,7 +1,7 @@
 # E-commerce
-<img src="cart_app/static/images/Screen Shot 2022-04-15 at 8.46.04 PM.png" width="300" height="300">
-<img src="cart_app/static/images/Screen Shot 2022-04-15 at 8.46.44 PM.png" width="300" height="300">
-<img src="cart_app/static/images/Screen Shot 2022-04-15 at 8.50.24 PM.png" width="300" height="300">
+<img src="cart_app/static/images/Screen Shot 2022-04-15 at 8.46.04 PM.png" width="1000" height="700">
+<img src="cart_app/static/images/Screen Shot 2022-04-15 at 8.46.44 PM.png" width="1000" height="700">
+<img src="cart_app/static/images/Screen Shot 2022-04-15 at 8.50.24 PM.png" width="1000" height="700">
 <ul>
   <li> Backend: Python</li>
   <li> Framework: Dajngo</li>
