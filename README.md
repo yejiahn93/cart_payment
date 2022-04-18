@@ -17,7 +17,7 @@ Jelly Shop
 
 ## Features
 <ul>
-  <li> Login &amp; register, logout</li>
+  <li> Login, register, logout</li>
   <li> Main Page -Jelly list</li>
   <li> cart, checkout Page</li>
 </ul>
