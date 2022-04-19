@@ -11,7 +11,7 @@
 
 ## Description
 <p>
-Jelly Shop
+Buy Jelly
 </p>
 
 
