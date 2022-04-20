@@ -11,7 +11,7 @@
 
 ## Description
 <p>
-Buy Jelly
+My first e-commerce website
 </p>
 
 
