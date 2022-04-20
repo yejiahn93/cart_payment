@@ -39,6 +39,11 @@ def checkout(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'store/checkout.html', context)
 
+def view(request,id):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    context = {'products': Product.objects.get(id=id), 'cartItems': cartItems}
+    return render(request, 'store/view.html', context)
 
 def updateItem(request):
     data = json.loads(request.body)
