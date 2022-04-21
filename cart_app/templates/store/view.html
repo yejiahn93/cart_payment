@@ -1,6 +1,7 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content%}
+
 <div class="row">
     <div class="col-lg-4">
         <img class= "thumbnail" src="{{products.imageURL}}">
@@ -9,6 +10,92 @@
             <hr>
             <button data-product={{products.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
             <h4 style="display: inline-block; float: right;">${{products.price|floatformat:2}}</h4>
+        </div>
+        <div>
+            <p class="">Detail</p>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h5 class="text-upperCase font-weight-bold">Customer Reviews</h5>
+        <hr class="mt-0 pt-0">
+        <div class="row">
+            <div class="col-sm-7 mt-2">
+            {% for review in reviews%}
+                <div class="review-heading">
+                    <a class="text-capitalize"><i class="fa fa-user"></i> {{review.user}}</a>
+                    <a class="ml-2"><i class="fa fa-clock-o mr-1"></i> {{review.created_at}}</a> 
+                    {% if review.rate > 0 %}
+                    <i class="fa fa-star"  style="float:right;"></i>
+                    {% endif %} 
+                    {% if review.rate > 1 %}
+                    <i class="fa fa-star" style="float:right;"></i>
+                    {% endif %} 
+                    {% if review.rate > 2 %}
+                    <i class="fa fa-star" style="float:right;"></i>
+                    {% endif %} 
+                    {% if review.rate > 3 %}
+                    <i class="fa fa-star" style="float:right;"></i>   
+                    {% endif %}  
+                    {% if review.rate > 4 %}
+                    <i class="fa fa-star" style="float:right;"></i>
+                    {% endif %}     
+
+                    <!-- <i class="fa fa-star {% if review.rate > 0 %} checked {% endif %}" style="float:right;">{{review.rate}}</i>
+                    <i class="fa fa-star {% if review.rate > 1 %} checked {% endif %}" style="float:right;"></i>
+                    <i class="fa fa-star {% if review.rate > 2 %} checked {% endif %}" style="float:right;"></i>
+                    <i class="fa fa-star {% if review.rate > 3 %} checked {% endif %}" style="float:right;"></i>
+                    <i class="fa fa-star {% if review.rate > 4 %} checked {% endif %}" style="float:right;"></i> -->
+                </div>
+                <div class="review-body mt-2">
+                    <p>{{review.comment}}</p>
+                </div>  
+                {% if review.user == request.user.customer%}
+                <div class="delete_button">
+                    <form action="/view/{{review.id}}/delete" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>   
+                </div>
+                {%endif%}
+            {% endfor %}
+            </div>
+            <div class="col-sm-5 mt-2">
+                <h5 class="text-upperCase font-weight-bold">Write Your Review</h5>
+                <form class="review-form" method="GET" action="/review">
+                {%for prod in product%}
+                <input type="hidden" name="prod_id" id="prod_id" value="{{prod.id}}">
+                {%endfor%}
+                <div class="form-group">
+                    <textarea class="input" type="text" name="comment" placeholder="Your Review"></textarea>
+                </div>
+                <div class="form-group">  
+                        <div class="input-rating">
+                            <p class="text-upperCase font-weight-bold">Your Rating:</p>
+                            <div class="rate">
+                                <input type="radio" id="star-5" name="rate" value="5" />
+                                <label for="star-5" class="fas fa-star">5 stars</label>
+
+                                <input type="radio" id="star-4" name="rate" value="4" />
+                                <label for="star-4" class="fas fa-star">4 stars</label>
+
+                                <input type="radio" id="star-3" name="rate" value="3" />
+                                <label for="star-3" class="fas fa-star">3 stars</label>
+
+                                <input type="radio" id="star-2" name="rate" value="2" />
+                                <label for="star-2" class="fas fa-star">2 stars</label>
+
+                                <input type="radio" id="star-1" name="rate" value="1" />
+                                <label for="star-1" class="fas fa-star">1 star</label>
+                            </div>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {%else%}
+                    <p>You must be logged in for post a review, <a href="{% url 'login'%}">Login</a></p>
+                    {% endif%}
+                    </form>    
+                </div>
         </div>
     </div>
 </div>

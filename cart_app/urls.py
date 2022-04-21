@@ -5,11 +5,12 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin', admin.site.urls),
     path('', views.store, name="store"),
     path('cart/', views.cart, name="cart"),
     path('checkout/', views.checkout, name="checkout"),
-    path('<int:id>', views.view, name="view"),
+    path('view/<int:id>', views.view, name="view"),
+    path("view/<int:id>/delete", views.delete),
+    path('review/', views.review_rate, name="review"),
     path('update_item/', views.updateItem, name="update_item"),
     path('process_order/', views.processOrder, name="process_order"),
     path('register/', views.registerPage, name="register"),

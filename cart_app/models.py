@@ -29,6 +29,15 @@ class Product(models.Model):
             url = ''
         return url
 
+class Review(models.Model):
+    user = models.ForeignKey(Customer, models.CASCADE)
+    product = models.ForeignKey(Product, models.CASCADE)
+    comment = models.TextField(max_length=259)
+    rate = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.id)
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete= models.SET_NULL, blank=True, null=True)

@@ -41,10 +41,29 @@ def checkout(request):
 
 def view(request,id):
     data = cartData(request)
+    product = Product.objects.filter(id=id)
+    productreview = Product.objects.get(id=id)
+    review = Review.objects.filter(product=productreview)
+    print(review)
     cartItems = data['cartItems']
-    context = {'products': Product.objects.get(id=id), 'cartItems': cartItems}
+    context = {'products': Product.objects.get(id=id), 'product':product, 'reviews':review, 'cartItems': cartItems}
     return render(request, 'store/view.html', context)
 
+def review_rate(request):
+    if request.method == "GET":
+        prod_id = request.GET.get('prod_id')
+        product = Product.objects.get(id = prod_id)
+        comment = request.GET.get('comment')
+        rate = request.GET.get('rate')
+        user = request.user.customer
+        Review(user= user, product=product, comment=comment, rate=rate).save()
+        return redirect('view', id=prod_id)
+
+def delete(request,id):
+    review= Review.objects.get(id=id)
+    review.delete()
+    return redirect('view', id=review.product.id)
+    
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -130,7 +149,7 @@ def registerPage(request):
             Customer.objects.create(
                 user=user,
                 name=username,
-                email = user.email
+                email = user.email,
             )
             messages.success(request, 'Account was created')
             return redirect('/login')
