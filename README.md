@@ -21,7 +21,7 @@ My first e-commerce website
 ## Features
 <ul>
   <li> Login, register, logout</li>
-  <li>Customer Review/Rating<li>
+  <li>Customer Review/Rating</li>
   <li> Main Page -Jelly list</li>
   <li> cart, checkout Page</li>
 </ul>
