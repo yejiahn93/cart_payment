@@ -14,7 +14,7 @@
 
 ## Description
 <p>
-My first e-commerce website
+My first e-commerce website(Jelly store)
 </p>
 
 
