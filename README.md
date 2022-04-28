@@ -23,6 +23,6 @@ My first e-commerce website(Jelly store)
   <li> Login, register, logout</li>
   <li>Customer Review/Rating</li>
   <li> Main Page -Jelly list</li>
-  <li> cart, checkout Page</li>
+  <li> cart, checkout Page(using paypal API)</li>
 </ul>
 
